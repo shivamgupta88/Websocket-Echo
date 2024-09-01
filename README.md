@@ -9,9 +9,7 @@ https://shivam-websockets.netlify.app/
 <br>
 
 `go run ./... `
-
-### If goLang is setup on your system then you will see
-
+<br>
 `Server started on :8080`
 
 ### To start the frontend
