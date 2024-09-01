@@ -8,8 +8,10 @@ function App() {
   const [messageHistory, setMessageHistory] = useState([]);
   const [lastFiveMessages, setLastFiveMessages] = useState([]);
   const [isNightMode, setIsNightMode] = useState(false);
+  const websocketUrl = process.env.REACT_APP_WEBSOCKET_URL;
+  const apiUrl = process.env.REACT_APP_API_URL;
 
-  const { sendMessage, readyState } = useWebSocket("ws://localhost:8080/ws", {
+  const { sendMessage, readyState } = useWebSocket(websocketUrl, {
     onOpen: () => console.log("Connected to WebSocket"),
     onMessage: (msg) => {
       setMessageHistory((prev) => [...prev, msg.data]);
@@ -27,7 +29,7 @@ function App() {
 
   const handleGetLastFiveMessages = async () => {
     try {
-      const res = await fetch("http://localhost:8080/history");
+      const res = await fetch(`${apiUrl}/history`);
       if (!res.ok) {
         throw new Error("Failed to fetch history");
       }
